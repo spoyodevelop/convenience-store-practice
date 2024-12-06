@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import validateShoppingCart from './Validator/validateShoppingCart.js';
 
 const InputView = {
   async readDate() {
@@ -7,15 +8,22 @@ const InputView = {
     );
   },
   async getValidShoppingCart(products) {
-    // while (true) {
-    //   const input = await Console.readLineAsync(
-    //     '주문하실 매뉴와 개수를 알려주세요.',
-    //   );
-    //   const shoppingCart = validateShoppingCart(input, products);
-    //   if (shoppingCart !== null) {
-    //     return shoppingCart; // 유효한 입력일 경우 반환
-    //   }
-    // }
+    while (true) {
+      const input = await Console.readLineAsync(
+        '구매하실 상품명과 수량을 입력해 주세요. (예: [사이다-2],[감자칩-1])',
+      );
+      let shoppingCart;
+      try {
+        shoppingCart = validateShoppingCart(input, products);
+      } catch (error) {
+        Console.print(error.message);
+        continue;
+      }
+
+      if (shoppingCart !== null) {
+        return shoppingCart; // 유효한 입력일 경우 반환
+      }
+    }
   },
   async getValidDate() {
     //     while (true) {

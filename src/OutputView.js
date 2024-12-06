@@ -8,5 +8,9 @@ const OutputView = {
   printMessage(message) {
     Console.print(message);
   },
+
+  printProducts(products) {
+    products.forEach((product) => Console.print(product.toString()));
+  },
 };
 export default OutputView;
