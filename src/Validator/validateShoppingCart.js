@@ -1,10 +1,10 @@
 function checkAvailableQuantity(products, name, quantity) {
-  const availableQuantity = 0;
-  const foundProduct = products.map((product) => product.name === name);
-  foundProduct.forEach((product) => (avaliableQuantity += product.quantity));
-  return quantity < availableQuantity;
+  let availableQuantity = 0;
+  const foundProduct = products.filter((product) => product.name === name);
+  console.log(foundProduct);
+  foundProduct.forEach((product) => (availableQuantity += +product.quantity));
+  return availableQuantity > quantity;
 }
-
 export default function validateShoppingCart(input, products) {
   const shoppingCart = [];
   if (!input.startsWith('[') || !input.includes(']') || !input.includes('-'))
@@ -27,6 +27,8 @@ export default function validateShoppingCart(input, products) {
       if (Number.isNaN(Number(quantity)) || Number(quantity) < 0) {
         throw new Error('[ERROR] 포멧이 올바르지 않습니다. ');
       }
+      if (!checkAvailableQuantity(products, productName, quantity))
+        throw new Error('[ERROR] 수량이 부족합니다.');
 
       shoppingCart.push([productName, +quantity]);
     });
@@ -38,6 +40,8 @@ export default function validateShoppingCart(input, products) {
     if (Number.isNaN(Number(quantity)) || Number(quantity) < 0) {
       throw new Error('[ERROR] 포멧이 올바르지 않습니다.');
     }
+    if (!checkAvailableQuantity(products, productName, quantity))
+      throw new Error('[ERROR] 수량이 부족합니다.');
 
     shoppingCart.push([productName, +quantity]);
   }

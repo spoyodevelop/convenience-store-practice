@@ -27,17 +27,9 @@ class App {
       if (addableItems.includes(name))
         products.push(new Product(name, price, 0, null));
     });
-    const input = await InputView.getValidShoppingCart();
-    function checkAvailableQuantity(products, name, quantity) {
-      const availableQuantity = 0;
-      const foundProduct = products.map((product) => product.name === name);
-      foundProduct.forEach(
-        (product) => (avaliableQuantity += product.quantity),
-      );
-      return availableQuantity;
-    }
-
-    checkAvailableQuantity(products);
+    const input = await InputView.getValidShoppingCart(products);
+    console.log(input);
+    // console.log(checkAvailableQuantity(products, '사이다', 0));
   }
 }
 
