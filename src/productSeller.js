@@ -24,10 +24,6 @@ export default async function sellProduct(products, shoppingItem) {
 
   let remainer = nonPromoSellQuantity;
 
-  if (promoSellQuantity > 0) {
-    remainer += promo.getRemainderAmount(promoSellQuantity);
-  }
-
   if (
     promo &&
     promoProductQuantity > promoSellQuantity + 1 &&
@@ -40,7 +36,9 @@ export default async function sellProduct(products, shoppingItem) {
       promoSellQuantity += 1;
     }
   }
-
+  if (promoSellQuantity > 0) {
+    remainer += promo.getRemainderAmount(promoSellQuantity);
+  }
   if (promo && remainer + nonPromoSellQuantity >= promo.promotionQuantity) {
     const userAgree = await InputView.getYesOrNoAnswer(
       `현재 ${shoppingName} ${remainer}개는 프로모션 할인이 적용되지않습니다. 그래도 구매하시겠습니까?`,
