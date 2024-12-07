@@ -59,7 +59,10 @@ async function sellProductNotExpired(products, shoppingItem) {
   if (promo) {
     freebie = promo.getFreebieAmount(promoSellQuantity);
   }
-  //remainer를 잘 계산해볼것
+  // remainer를 잘 계산해볼것
+  if (remainer - nonPromoSellQuantity < 0) {
+    remainer = 0;
+  }
   return {
     shoppingName,
     promoSellQuantity,
@@ -94,7 +97,7 @@ function sellExpiredProduct(products, shoppingItem) {
     shoppingName,
     promoSellQuantity,
     nonPromoSellQuantity,
-    remainer: remainer - nonPromoSellQuantity,
+    remainer,
     price: nonPromo.price,
     freebie,
   };

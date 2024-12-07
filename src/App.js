@@ -51,7 +51,7 @@ class App {
 
       const boughtProductList = listEachItem(listOfItemBought);
       const freebieList = listFreebieItem(listOfItemBought);
-      const totalBill = calculateBill(listOfItemBought, true);
+      const totalBill = calculateBill(listOfItemBought, membership);
       console.log(totalBill);
       OutputView.printListProduct(boughtProductList);
       OutputView.printFreebieProduct(freebieList);
