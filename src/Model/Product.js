@@ -24,10 +24,6 @@ class Product {
     return num.toLocaleString('ko-KR');
   }
 
-  get quantity() {
-    return this.#quantity;
-  }
-
   get name() {
     return this.#name;
   }
@@ -36,8 +32,16 @@ class Product {
     return this.#promotion.getFreebieAmount(amount);
   }
 
+  getRemainderAmount(amount) {
+    return this.#promotion.getRemainder(amount);
+  }
+
   get promotion() {
     return this.#promotion.name;
+  }
+
+  get quantity() {
+    return this.#quantity;
   }
 
   toString() {

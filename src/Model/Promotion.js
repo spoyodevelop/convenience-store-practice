@@ -40,6 +40,10 @@ class Promotion {
     return Math.floor(amount / (this.#buy + 1)) * this.#get;
   }
 
+  getRemainder(amount) {
+    return amount % (this.#buy + 1);
+  }
+
   toString() {
     return `${this.#name} ${this.#buy} ${this.#get} ${this.#startDate}`;
   }

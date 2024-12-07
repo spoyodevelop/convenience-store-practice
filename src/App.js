@@ -30,11 +30,12 @@ class App {
     });
 
     // const input = await InputView.getYesOrNoAnswer('y/n?');
-
-    const shoppingItems = await InputView.getValidShoppingCart(products);
-    shoppingItems.forEach((shoppingItem) =>
-      sellProduct(products, shoppingItem),
-    );
+    while (true) {
+      const shoppingItems = await InputView.getValidShoppingCart(products);
+      shoppingItems.forEach((shoppingItem) =>
+        sellProduct(products, shoppingItem),
+      );
+    }
   }
 }
 
