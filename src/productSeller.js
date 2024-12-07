@@ -1,3 +1,4 @@
+import { DateTimes } from '@woowacourse/mission-utils';
 import InputView from './InputView.js';
 
 function checkProductAvailable(products, name) {
@@ -9,8 +10,7 @@ function checkProductAvailable(products, name) {
   );
   return [promo, noPromo];
 }
-
-export default async function sellProduct(products, shoppingItem) {
+async function sellProductNotExpired(products, shoppingItem) {
   const [shoppingName, quantity] = shoppingItem;
 
   const [promo, nonPromo] = checkProductAvailable(products, shoppingName);
@@ -59,7 +59,7 @@ export default async function sellProduct(products, shoppingItem) {
   if (promo) {
     freebie = promo.getFreebieAmount(promoSellQuantity);
   }
-
+  //remainer를 잘 계산해볼것
   return {
     shoppingName,
     promoSellQuantity,
@@ -68,4 +68,45 @@ export default async function sellProduct(products, shoppingItem) {
     price: nonPromo.price,
     freebie,
   };
+}
+function sellExpiredProduct(products, shoppingItem) {
+  const [shoppingName, quantity] = shoppingItem;
+
+  const [promo, nonPromo] = checkProductAvailable(products, shoppingName);
+
+  const promoProductQuantity = promo?.quantity ?? 0;
+
+  //   const nonPromoProductQuantity = nonPromo?.quantity ?? 0;
+
+  const promoSellQuantity = Math.min(promoProductQuantity, quantity);
+  const nonPromoSellQuantity = quantity - promoSellQuantity;
+
+  const remainer = 0;
+
+  if (promoSellQuantity > 0) {
+    promo.sellProduct(promoSellQuantity);
+  }
+  if (nonPromoSellQuantity > 0) {
+    nonPromo.sellProduct(nonPromoSellQuantity);
+  }
+  const freebie = 0;
+  return {
+    shoppingName,
+    promoSellQuantity,
+    nonPromoSellQuantity,
+    remainer: remainer - nonPromoSellQuantity,
+    price: nonPromo.price,
+    freebie,
+  };
+}
+export default async function sellProduct(products, shoppingItem) {
+  const [shoppingName, quantity] = shoppingItem;
+  const [promo, nonPromo] = checkProductAvailable(products, shoppingName);
+
+  if (promo && promo.isWithinDate(DateTimes.now())) {
+    const saleData = await sellProductNotExpired(products, shoppingItem);
+    console.log(saleData);
+    return saleData;
+  }
+  return sellExpiredProduct(products, shoppingItem);
 }

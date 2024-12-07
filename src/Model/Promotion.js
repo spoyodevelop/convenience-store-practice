@@ -48,6 +48,10 @@ class Promotion {
     return amount % (this.#buy + 1);
   }
 
+  isWithinDate(date) {
+    return this.#startDate <= date && this.#endDate >= date;
+  }
+
   toString() {
     return `${this.#name} ${this.#buy} ${this.#get} ${this.#startDate}`;
   }

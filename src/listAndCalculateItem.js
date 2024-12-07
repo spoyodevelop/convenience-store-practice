@@ -49,7 +49,7 @@ function calculateBill(listOfItemBought, membership) {
       totalProductPrice += (promoSellQuantity + nonPromoSellQuantity) * price;
       totalDiscountPrice += freebie * price;
       const membershipDiscountable = nonPromoSellQuantity + remainer;
-      // console.log(shoppingName, nonPromoSellQuantity, remainer);
+      console.log(shoppingName, membershipDiscountable);
       membershipDiscount += membershipDiscountable * price * 0.3;
     },
   );

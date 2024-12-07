@@ -32,6 +32,10 @@ class Product {
     return this.#name;
   }
 
+  isWithinDate(date) {
+    return this.#promotion.isWithinDate(date);
+  }
+
   getFreebieAmount(amount) {
     return this.#promotion.getFreebieAmount(amount);
   }

@@ -41,7 +41,9 @@ class App {
       const shoppingItems = await InputView.getValidShoppingCart(products);
       const listOfItemBought = [];
       for (const shoppingItem of shoppingItems) {
-        listOfItemBought.push(await sellProduct(products, shoppingItem));
+        const saleData = await sellProduct(products, shoppingItem);
+        console.log(saleData);
+        listOfItemBought.push(saleData);
       }
       const membership = await InputView.getYesOrNoAnswer(
         '멤버십 할인을 받으시겠습니까? (Y/N)',
@@ -49,8 +51,8 @@ class App {
 
       const boughtProductList = listEachItem(listOfItemBought);
       const freebieList = listFreebieItem(listOfItemBought);
-      const totalBill = calculateBill(listOfItemBought, membership);
-
+      const totalBill = calculateBill(listOfItemBought, true);
+      console.log(totalBill);
       OutputView.printListProduct(boughtProductList);
       OutputView.printFreebieProduct(freebieList);
       OutputView.printTotal(totalBill);
