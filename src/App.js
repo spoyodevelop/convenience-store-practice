@@ -3,7 +3,12 @@ import Product from './Model/Product.js';
 import InputView from './InputView.js';
 import OutputView from './OutputView.js';
 import sellProduct from './productSeller.js';
-import calculateBill from './billMaker.js';
+
+import {
+  listEachItem,
+  listFreebieItem,
+  calculateBill,
+} from './listAndCalculateItem.js';
 
 class App {
   async run() {
@@ -37,7 +42,13 @@ class App {
       for (const shoppingItem of shoppingItems) {
         listOfItemBought.push(await sellProduct(products, shoppingItem));
       }
-      calculateBill(listOfItemBought);
+      const boughtProductList = listEachItem(listOfItemBought);
+      const freebieList = listFreebieItem(listOfItemBought);
+      const totalBill = calculateBill(listOfItemBought);
+      OutputView.printListProduct(boughtProductList);
+      OutputView.printFreebieProduct(freebieList);
+      OutputView.printTotal(totalBill);
+
       products.forEach((product) => console.log(product.toString()));
     }
   }

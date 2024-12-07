@@ -41,7 +41,7 @@ export default async function sellProduct(products, shoppingItem) {
     }
   }
 
-  if (promo && remainer >= promo.promotionQuantity) {
+  if (promo && remainer + nonPromoSellQuantity >= promo.promotionQuantity) {
     const userAgree = await InputView.getYesOrNoAnswer(
       `현재 ${shoppingName} ${remainer}개는 프로모션 할인이 적용되지않습니다. 그래도 구매하시겠습니까?`,
     );
@@ -61,9 +61,12 @@ export default async function sellProduct(products, shoppingItem) {
   if (promo) {
     freebie = promo.getFreebieAmount(promoSellQuantity);
   }
+
   return {
     shoppingName,
-    quantity: promoSellQuantity + nonPromoSellQuantity,
+    promoSellQuantity,
+    nonPromoSellQuantity,
+    remainer: remainer - nonPromoSellQuantity,
     price: nonPromo.price,
     freebie,
   };
