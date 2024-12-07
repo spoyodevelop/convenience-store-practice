@@ -37,19 +37,29 @@ class App {
 
     // const input = await InputView.getYesOrNoAnswer('y/n?');
     while (true) {
+      OutputView.printProducts(products);
       const shoppingItems = await InputView.getValidShoppingCart(products);
       const listOfItemBought = [];
       for (const shoppingItem of shoppingItems) {
         listOfItemBought.push(await sellProduct(products, shoppingItem));
       }
+      const membership = await InputView.getYesOrNoAnswer(
+        '멤버십 할인을 받으시겠습니까? (Y/N)',
+      );
+
       const boughtProductList = listEachItem(listOfItemBought);
       const freebieList = listFreebieItem(listOfItemBought);
-      const totalBill = calculateBill(listOfItemBought);
+      const totalBill = calculateBill(listOfItemBought, membership);
+
       OutputView.printListProduct(boughtProductList);
       OutputView.printFreebieProduct(freebieList);
       OutputView.printTotal(totalBill);
 
-      products.forEach((product) => console.log(product.toString()));
+      const moreSale = await InputView.getYesOrNoAnswer(
+        '감사합니다. 구매하고 싶은 다른 상품이 있나요? (Y/N)',
+      );
+
+      if (!moreSale) break;
     }
   }
 }

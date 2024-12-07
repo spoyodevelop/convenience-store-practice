@@ -9,13 +9,14 @@ function listEachItem(listOfItemBought) {
     }) => ({
       shoppingName,
       quantity: promoSellQuantity + nonPromoSellQuantity,
-      price,
+      price: price * (promoSellQuantity + nonPromoSellQuantity),
     }),
   );
 }
 
 function listFreebieItem(listOfItemBought) {
-  return listOfItemBought.map(
+  const itemWithFreebie = listOfItemBought.filter(({ freebie }) => freebie > 0);
+  return itemWithFreebie.map(
     ({
       shoppingName,
       promoSellQuantity,
@@ -48,13 +49,13 @@ function calculateBill(listOfItemBought, membership) {
       totalProductPrice += (promoSellQuantity + nonPromoSellQuantity) * price;
       totalDiscountPrice += freebie * price;
       const membershipDiscountable = nonPromoSellQuantity + remainer;
-      console.log(shoppingName, nonPromoSellQuantity, remainer);
+      // console.log(shoppingName, nonPromoSellQuantity, remainer);
       membershipDiscount += membershipDiscountable * price * 0.3;
     },
   );
-
-  if (membership) {
-    membershipDiscount = Math.min(8000, membershipDiscount);
+  membershipDiscount = Math.min(8000, membershipDiscount);
+  if (!membership) {
+    membershipDiscount = 0;
   }
 
   return {

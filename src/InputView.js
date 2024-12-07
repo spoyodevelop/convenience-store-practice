@@ -33,6 +33,7 @@ const InputView = {
       if (input.toUpperCase() === 'N') {
         return false;
       }
+      Console.print('[ERROR]: 잘못된 입력입니다. 다시 입력해주세요.');
     }
   },
 };
