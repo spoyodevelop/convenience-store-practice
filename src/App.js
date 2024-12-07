@@ -32,9 +32,10 @@ class App {
     // const input = await InputView.getYesOrNoAnswer('y/n?');
     while (true) {
       const shoppingItems = await InputView.getValidShoppingCart(products);
-      shoppingItems.forEach((shoppingItem) =>
-        sellProduct(products, shoppingItem),
-      );
+      for (const shoppingItem of shoppingItems) {
+        await sellProduct(products, shoppingItem);
+      }
+      products.forEach((product) => console.log(product.toString()));
     }
   }
 }
