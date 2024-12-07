@@ -1,6 +1,6 @@
 import { readFile, readFileSync } from 'fs';
 
-export default async function readCSV(path) {
+export default function readCSV(path) {
   const result = [];
   const fileData = readFileSync(path, 'utf-8', (err, fileData) => {
     if (err) console.error(err);

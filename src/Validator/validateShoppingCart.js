@@ -34,7 +34,9 @@ export default function validateShoppingCart(input, products) {
       if (!checkProductAvaliable(products, productName))
         throw new Error('[ERROR] 물건이 존재하지 않습니다.');
       if (!checkAvailableQuantity(products, productName, quantity))
-        throw new Error('[ERROR] 수량이 부족합니다.');
+        throw new Error(
+          '[ERROR] 재고 수량을 초과하여 구매할 수 없습니다. 다시 입력해 주세요.',
+        );
 
       shoppingCart.push([productName, +quantity]);
     });
@@ -49,7 +51,9 @@ export default function validateShoppingCart(input, products) {
     if (!checkProductAvaliable(products, productName))
       throw new Error('[ERROR] 물건이 존재하지 않습니다.');
     if (!checkAvailableQuantity(products, productName, quantity))
-      throw new Error('[ERROR] 수량이 부족합니다.');
+      throw new Error(
+        '[ERROR] 재고 수량을 초과하여 구매할 수 없습니다. 다시 입력해 주세요.',
+      );
 
     shoppingCart.push([productName, +quantity]);
   }

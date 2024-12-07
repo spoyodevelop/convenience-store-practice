@@ -1,6 +1,6 @@
 import readCSV from '../csvParser.js';
 
-const promotionCSV = await readCSV('public/promotions.md');
+const promotionCSV = readCSV('public/promotions.md');
 
 function findPromotion(promotions, name) {
   return promotions.find((promotion) => promotion[0] === name);
