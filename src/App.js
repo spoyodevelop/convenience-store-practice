@@ -3,6 +3,7 @@ import Product from './Model/Product.js';
 import InputView from './InputView.js';
 import OutputView from './OutputView.js';
 import sellProduct from './productSeller.js';
+import calculateBill from './billMaker.js';
 
 class App {
   async run() {
@@ -32,9 +33,11 @@ class App {
     // const input = await InputView.getYesOrNoAnswer('y/n?');
     while (true) {
       const shoppingItems = await InputView.getValidShoppingCart(products);
+      const listOfItemBought = [];
       for (const shoppingItem of shoppingItems) {
-        await sellProduct(products, shoppingItem);
+        listOfItemBought.push(await sellProduct(products, shoppingItem));
       }
+      calculateBill(listOfItemBought);
       products.forEach((product) => console.log(product.toString()));
     }
   }

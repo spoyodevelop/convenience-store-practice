@@ -52,6 +52,10 @@ class Product {
     return this.#promotion.buy;
   }
 
+  get price() {
+    return this.#price;
+  }
+
   toString() {
     let displayQuantity = `${this.#quantity}개`;
     let displayPromo = this.#promotion.name;

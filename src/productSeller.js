@@ -57,8 +57,14 @@ export default async function sellProduct(products, shoppingItem) {
   if (nonPromoSellQuantity > 0) {
     nonPromo.sellProduct(nonPromoSellQuantity);
   }
-  let freebie;
+  let freebie = 0;
   if (promo) {
     freebie = promo.getFreebieAmount(promoSellQuantity);
   }
+  return {
+    shoppingName,
+    quantity: promoSellQuantity + nonPromoSellQuantity,
+    price: nonPromo.price,
+    freebie,
+  };
 }
