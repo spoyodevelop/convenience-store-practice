@@ -3,7 +3,7 @@ function checkAvailableQuantity(products, name, quantity) {
   const foundProduct = products.filter((product) => product.name === name);
 
   foundProduct.forEach((product) => (availableQuantity += +product.quantity));
-  return availableQuantity > quantity;
+  return availableQuantity >= quantity;
 }
 function checkProductAvaliable(products, name) {
   const foundProduct = products.filter((product) => product.name === name);

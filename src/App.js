@@ -2,6 +2,7 @@ import readCSV from './csvParser.js';
 import Product from './Model/Product.js';
 import InputView from './InputView.js';
 import OutputView from './OutputView.js';
+import sellProduct from './productSeller.js';
 
 class App {
   async run() {
@@ -28,10 +29,12 @@ class App {
         products.push(new Product(name, price, 0, null));
     });
 
-    const input = await InputView.getYesOrNoAnswer('y/n?');
+    // const input = await InputView.getYesOrNoAnswer('y/n?');
 
-    // const input = await InputView.getValidShoppingCart(products);
-    // console.log(input);
+    const shoppingItems = await InputView.getValidShoppingCart(products);
+    shoppingItems.forEach((shoppingItem) =>
+      sellProduct(products, shoppingItem),
+    );
   }
 }
 

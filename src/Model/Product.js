@@ -36,6 +36,10 @@ class Product {
     return this.#promotion.getFreebieAmount(amount);
   }
 
+  get promotion() {
+    return this.#promotion.name;
+  }
+
   toString() {
     let displayQuantity = `${this.#quantity}개`;
     let displayPromo = this.#promotion.name;
