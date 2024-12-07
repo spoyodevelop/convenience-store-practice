@@ -36,6 +36,10 @@ class Promotion {
     return this.#name;
   }
 
+  getFreebieAmount(amount) {
+    return Math.floor(amount / (this.#buy + 1)) * this.#get;
+  }
+
   toString() {
     return `${this.#name} ${this.#buy} ${this.#get} ${this.#startDate}`;
   }

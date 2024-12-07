@@ -16,6 +16,10 @@ class Product {
     this.#promotion = new Promotion(promotion);
   }
 
+  sellProduct(quantity) {
+    this.#quantity -= quantity;
+  }
+
   #toNumberFormatOfKor(num) {
     return num.toLocaleString('ko-KR');
   }
@@ -26,6 +30,10 @@ class Product {
 
   get name() {
     return this.#name;
+  }
+
+  getFreebieAmount(amount) {
+    return this.#promotion.getFreebieAmount(amount);
   }
 
   toString() {

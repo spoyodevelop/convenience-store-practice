@@ -25,15 +25,15 @@ const InputView = {
       }
     }
   },
-  async getValidDate() {
-    //     while (true) {
-    //       const input = await Console.readLineAsync('방문하실 날짜를 입력해주세요');
-    //       const number = validateDateNumber(input);
-    //       if (number) {
-    //         return number;
-    //       }
-    //     }
-    //   },
+
+  async getYesOrNoAnswer(message) {
+    while (true) {
+      const input = await Console.readLineAsync(message);
+      if (input.toUpperCase() === 'Y') return true;
+      if (input.toUpperCase() === 'N') {
+        return false;
+      }
+    }
   },
 };
 export default InputView;

@@ -15,7 +15,7 @@ export default function validateShoppingCart(input, products) {
     throw new Error('[ERROR] 한개 이상의 뭐시기를 입력하세요.');
 
   const parseInput = input.split(',');
-  console.log(parseInput);
+
   if (parseInput.length > 1)
     parseInput.forEach((parsedInput) => {
       if (

@@ -27,9 +27,11 @@ class App {
       if (addableItems.includes(name))
         products.push(new Product(name, price, 0, null));
     });
-    const input = await InputView.getValidShoppingCart(products);
-    console.log(input);
-    // console.log(checkAvailableQuantity(products, '사이다', 0));
+
+    const input = await InputView.getYesOrNoAnswer('y/n?');
+
+    // const input = await InputView.getValidShoppingCart(products);
+    // console.log(input);
   }
 }
 
